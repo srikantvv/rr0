@@ -248,7 +248,7 @@ app.use(helmet.frameguard('deny'));   // Prevent iframe clickjacking
 //   EVEN USE IT AT ALL - I JUST WANTED TO
 //   LEARN HOW IT WORKS. :)
 
-//app.use(helmet.contentSecurityPolicy({
+// app.use(helmet.contentSecurityPolicy({
 //  defaultSrc: [
 //    "'self'",
 //    'skeleton-app.jit.su'
@@ -342,7 +342,7 @@ app.use(helmet.frameguard('deny'));   // Prevent iframe clickjacking
 //  setAllHeaders: false,  // set to true if you want to set all headers
 //  disableAndroid: false, // set to true if you want to disable Android (browsers can vary and be buggy)
 //  safari5: false         // set to true if you want to force buggy CSP in Safari 5
-//}));
+// }));
 
 // Passport OAUTH Middleware
 app.use(passport.initialize());
