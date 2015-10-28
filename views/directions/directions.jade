@@ -4,46 +4,22 @@ block head
   title #{pacFrom} &middot; #{pacTo} &middot; #{application}
 
 block styles
-  link(rel='stylesheet', href='/lib/animate.css/animate.css')
 
 block content
   .jumbotron.white
     h2 #{pacFrom} to #{pacTo}!
-    .container
-      .col-sm-7.pull-left
-        .col-sm-4
-          h4 Suggested Routes:
-      .row.hidden-xs
-      .col-sm-7
-        .col-sm-4
-          #route-buttons
-        .col-sm-6.pull-right
-          p There you areskjd ks
-      .col-sm-5.map.pull-right
-        #map-canvas.well.google-map-canvas
-      .row.hidden-xs
-        .col-md-12
-          h2 What is #{application}?
-      .row.hidden-xs
-        .col-md-4
-          h3
-            i.fa.fa-group.fa-lg.green
-            | &nbsp;&nbsp;Built for you
-          p
-            | #{application} Isss built with standard components such as Bootstrap and FontAwesome and is easy to customize.
-        .col-md-4
-          h3
-            i.fa.fa-bolt.fa-lg.yellow
-            | &nbsp;&nbsp;Lightning fast
-          p
-            | #{application} is optimized to ensure fast loading time. Google page speed index of 93/100 on a nodejitsu micro drone ($9/month).
-        .col-md-4
-          h3
-            i.fa.fa-tablet.fa-lg.fuchsia
-            | &nbsp;&nbsp;On every device
-          p
-            | #{application} is built to look great on every device. Fully responsive for mobile devices to ensure the best user experience.
-      .row
+    .col-sm-3
+      h4 Suggested Routes:
+    .row.hidden-xs
+    .col-sm-3
+      #route-buttons
+    .col-sm-9
+      .container.page
+        .col-sm-6
+          #content
+        .col-sm-5.map
+          #map-canvas.well.google-map-canvas
+    .row
 
 //- Page-specific stuff
 block scripts
@@ -73,6 +49,7 @@ block scripts
               $("#route-buttons").append(button);
           }
           directionsDisplay.setDirections(response);
+          document.getElementById('content').innerHTML = response.routes.length;
       } else {
           console.log(status);
       }
@@ -82,47 +59,16 @@ block scripts
         directionsDisplay.setRouteIndex(routeIndex);
     }
 
-    var cb = function() {
-      var l = document.createElement('link'); l.rel = 'stylesheet';
-      l.href = 'lib/odometer/themes/odometer-theme-minimal.css';
-      var h = document.getElementsByTagName('head')[0]; h.parentNode.insertBefore(l, h);
-    };
-    var raf = requestAnimationFrame || mozRequestAnimationFrame ||
-        webkitRequestAnimationFrame || msRequestAnimationFrame;
-    if (raf) raf(cb);
-    else window.addEventListener('load', cb);
-
   //- Tweak the styles a bit...
   style.
+    .page {
+        font-size: 20px;
+        background-color: #5cb85c;
+        border-style: solid;
+        border-color: #878a8c;
+    }
     #map-canvas {
-        width:100%;
-        height: 430px;
+        width:90%;
+        height: 330px;
     }
     .google-map-canvas,.google-map-canvas * { box-sizing:content-box; }
-    .github-count {
-      margin-top:20px;
-      font-size: 20px;
-      text-align: center;
-    }
-    .odometer-label {
-      margin-right: 10px;
-      line-height: 1;
-      vertical-align: middle;
-    }
-    .odometer {
-      padding: 13px 21px 11px;
-      margin: auto;
-      line-height: 1 !important;
-      border-radius: 6px;
-    }
-    .odometer-label a {
-      text-decoration: none;
-    }
-    .odometer-label a:hover {
-      color: #B10DC9;
-    }
-
-  script.
-    $(document).ready(function() {
-      $('body').addClass('bg-brand1');
-    });
