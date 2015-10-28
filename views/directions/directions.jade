@@ -8,7 +8,7 @@ block styles
 block content
   .jumbotron.white
     h2 #{pacFrom} to #{pacTo}!
-    .col-sm-3
+    .col-sm-3.container
       h4 Suggested Routes:
     .row.hidden-xs
     .col-sm-3
@@ -17,6 +17,8 @@ block content
       .container.page
         .col-sm-6
           #content
+          .col-sm-6
+           #extract
         .col-sm-5.map
           #map-canvas.well.google-map-canvas
     .row
@@ -49,12 +51,29 @@ block scripts
               $("#route-buttons").append(button);
           }
           directionsDisplay.setDirections(response);
+          var extract='<button id="extract" class ="btn btn-primary btn-lg" onclick="getRoadId(24.5,74.5)">' + "Extract" + '</button>&nbsp;<br>';
+          $("#extract").append(extract);
           document.getElementById('content').innerHTML = response.routes.length;
       } else {
           console.log(status);
       }
     });
 
+    function getRoadId(start_lat, start_lng) {
+        var searchRoad = {
+                  "start_lat": start_lat,
+                  "start_lng": start_lng
+        }
+        $.ajax({
+            type: 'POST',
+            data: searchRoad,
+            url: '/getroad',
+            dataType: 'JSON'
+        }).done(function( data ) {
+            $.each(data, function(){
+            });
+        });
+    }
     function selectRouteIndex(routeIndex) {
         directionsDisplay.setRouteIndex(routeIndex);
     }

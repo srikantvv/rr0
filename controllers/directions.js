@@ -3,6 +3,7 @@
  * Account Controller
  */
 
+var Road	= require('../models/Road');
 module.exports.controller = function (app) {
 
   app.post('/directions', function (req, res) {
@@ -24,6 +25,12 @@ module.exports.controller = function (app) {
     res.render('directions/directions', {
       pacFrom: req.params.from,
       pacTo: req.params.to
+    });
+  });
+
+  app.post('/getroad', function (req, res) {
+    Road.find({}, function (err, items) {
+      res.json(items);
     });
   });
   app.get('/directions', function (req, res) {
