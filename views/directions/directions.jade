@@ -51,8 +51,7 @@ block scripts
               $("#route-buttons").append(button);
           }
           directionsDisplay.setDirections(response);
-          var extract='<button id="extract" class ="btn btn-primary btn-lg" onclick="getRoadId(24.5,74.5)">' + "Extract" + '</button>&nbsp;<br>';
-          $("#extract").append(extract);
+          getRoadId(24.5,74.5);
           document.getElementById('content').innerHTML = response.routes.length;
       } else {
           console.log(status);
@@ -71,6 +70,7 @@ block scripts
             dataType: 'JSON'
         }).done(function( data ) {
             $.each(data, function(){
+              document.getElementById('content').innerHTML = this._id;
             });
         });
     }

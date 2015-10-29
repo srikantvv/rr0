@@ -29,7 +29,7 @@ module.exports.controller = function (app) {
   });
 
   app.post('/getroad', function (req, res) {
-    Road.find({}, function (err, items) {
+    Road.find({ start_lat : req.body.start_lat }, function (err, items) {
       res.json(items);
     });
   });
