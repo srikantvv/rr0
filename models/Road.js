@@ -36,6 +36,6 @@ var roadSchema = new mongoose.Schema({
   end_lng: { type: Number },
   type: { type: String, default: 'road' },
 
-}, { collection: 'roadcheck' });
+}, { collection: 'steplistn' });
 
 module.exports = mongoose.model('Road', roadSchema);

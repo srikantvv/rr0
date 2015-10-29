@@ -47,11 +47,17 @@ block scripts
     directionsService.route(request, function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
           for (var p = 0; p < response.routes.length; p++) {
+              var leg = response.routes[p].legs[0];
               var button='<button id="button' + p +'" class="btn btn-success btn-lg" onclick="selectRouteIndex(' + p + ')">' + "Rating:" + '<i class="fa fa-fw fa-twitter"></i>&nbsp;<br><font size="3">' + "Distance:" + response.routes[p].legs[0].distance.text + '<br>' + "Time:" +response.routes[p].legs[0].duration.text + '</font></button>&nbsp;<br>';
               $("#route-buttons").append(button);
+              for (var i = 0; i < leg.steps.length; i++) {
+                if (leg.steps[i].distance.value > 10000) {
+                  var start_lat = leg.steps[i].start_location.lat();; 
+                  var start_lng = leg.steps[i].start_location.lng();; 
+                  getRoadId(start_lat, start_lng);
+                }
+              }
           }
-          directionsDisplay.setDirections(response);
-          getRoadId(24.5,74.5);
           document.getElementById('content').innerHTML = response.routes.length;
       } else {
           console.log(status);
@@ -70,7 +76,7 @@ block scripts
             dataType: 'JSON'
         }).done(function( data ) {
             $.each(data, function(){
-              document.getElementById('content').innerHTML = this._id;
+              console.log(this._id);
             });
         });
     }
