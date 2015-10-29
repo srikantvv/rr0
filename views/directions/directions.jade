@@ -50,6 +50,7 @@ block scripts
               var leg = response.routes[p].legs[0];
               var button='<button id="button' + p +'" class="btn btn-success btn-lg" onclick="selectRouteIndex(' + p + ')">' + "Rating:" + '<i class="fa fa-fw fa-twitter"></i>&nbsp;<br><font size="3">' + "Distance:" + response.routes[p].legs[0].distance.text + '<br>' + "Time:" +response.routes[p].legs[0].duration.text + '</font></button>&nbsp;<br>';
               $("#route-buttons").append(button);
+              directionsDisplay.setDirections(response);
               for (var i = 0; i < leg.steps.length; i++) {
                 if (leg.steps[i].distance.value > 10000) {
                   var start_lat = leg.steps[i].start_location.lat();; 
